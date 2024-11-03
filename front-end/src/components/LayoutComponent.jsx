@@ -1,6 +1,6 @@
 // Layout.jsx
 import React, { useState } from 'react';
-import { Github } from 'lucide-react'
+import { Github, X } from 'lucide-react'
 import './LayoutComponent.css'
 import WinningCombinationsTrend from './WinningCombinationsTrend'
 import ElectoralMap from './ElectoralMap'
