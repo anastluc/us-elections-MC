@@ -239,16 +239,12 @@ if __name__ == "__main__":
     df['end_date'] = pd.to_datetime(df['end_date'], format="%m/%d/%y")
                                     #format='mixed',dayfirst=False, yearfirst=False)
 
-    # # Set the start date to #August #June 1, 2024
-    # start_date =  datetime(2024, 8, 1)
+   
+    # start_date =  datetime(2024, 8, 1)   
 
-    # # Set the end date to mid June
-    # end_date = datetime(2024, 10, 18)
-
-    # # Generate the list of dates
     # dates = generate_date_list(start_date, end_date, step=7)
-    start_date =  datetime(2024, 10, 20)
-    end_date = datetime(2024, 10, 23)
+    start_date =  datetime(2024, 10, 30)
+    end_date = datetime(2024, 11, 2)
     dates = generate_date_list(start_date, end_date, step=1)
     print(dates)
 
