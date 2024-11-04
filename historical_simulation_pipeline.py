@@ -243,8 +243,8 @@ if __name__ == "__main__":
     # start_date =  datetime(2024, 8, 1)   
 
     # dates = generate_date_list(start_date, end_date, step=7)
-    start_date =  datetime(2024, 10, 30)
-    end_date = datetime(2024, 11, 2)
+    start_date =  datetime(2024, 11, 1)
+    end_date = datetime(2024, 11, 3)
     dates = generate_date_list(start_date, end_date, step=1)
     print(dates)
 

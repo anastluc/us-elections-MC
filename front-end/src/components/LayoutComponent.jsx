@@ -45,14 +45,14 @@ const Modal = ({ isOpen, onClose }) => {
 export default function Layout() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const up_to_date = "2024_11_02"
-  const up_to_date_human = "2nd November 2024"
+  const up_to_date = "2024_11_03"
+  const up_to_date_human = "3rd November 2024"
 
-  const dates = [
-      "2024_10_29",
+  const dates = [      
       "2024_10_30", 
       "2024_10_31", 
       "2024_11_01",      
+      "2024_11_02",
     ];
   const most_frequent_src = `./data/visuals/election_map_${up_to_date}_most_frequent.html`
   const most_frequent_data = `./data/election_map_${up_to_date}_most_frequent.csv`
@@ -66,10 +66,11 @@ export default function Layout() {
   }
 
   const past_few_days_most_frequent = [      
-    {"date":"1st Nov 2024","data_src":`./data/election_map_${dates[3]}_most_frequent_1.csv`},
-    {"date":"31st Oct 2024","data_src":`./data/election_map_${dates[2]}_most_frequent_2.csv`},
-    {"date":"30th Oct 2024","data_src":`./data/election_map_${dates[1]}_most_frequent_3.csv`},
-    {"date":"29th Oct 2024","data_src":`./data/election_map_${dates[0]}_most_frequent_4.csv`},
+    {"date":"2nd Nov 2024","data_src":`./data/election_map_${dates[3]}_most_frequent_4.csv`},
+    {"date":"1st Nov 2024","data_src":`./data/election_map_${dates[2]}_most_frequent_1.csv`},
+    {"date":"31st Oct 2024","data_src":`./data/election_map_${dates[1]}_most_frequent_2.csv`},
+    {"date":"30th Oct 2024","data_src":`./data/election_map_${dates[0]}_most_frequent_3.csv`},
+    
     
   ]
 
@@ -100,10 +101,26 @@ export default function Layout() {
       <div className="container">
         {/* First row - full width */}
         <div className="row">
+          <h1>US Elections 2024: A Statistical Coinflip</h1>
+          <p>The 2024 United States presidential election is shaping up to be one of the most unpredictable contests 
+            in recent history, with polling data suggesting extremely thin margins in several key battleground states. 
+            To better understand the range of possible outcomes, political analysts are turning to sophisticated statistical 
+            methods like Monte Carlo simulations - the same mathematical technique used to evaluate <a href="https://en.wikipedia.org/wiki/Monte_Carlo_methods_in_finance">financial risks </a>
+            , <a href ="https://indico.cern.ch/event/92209/contributions/2114409/attachments/1098701/1567290/CST2010-MC.pdf">
+            model particle physics behavior</a>, and pretty much everywhere in engineering, biology, artificial intelligence,
+            sociology, everywhere that you need to handle high uncertainty that is inherent to real-world systems. </p>
+          <p>Monte Carlo methods are particularly well-suited for analyzing US presidential elections due to the unique 
+            nature of the <a href="https://en.wikipedia.org/wiki/United_States_Electoral_College">Electoral College system</a>,
+             where winning a state by even the smallest margin awards all of 
+            that state's electoral votes to the victor. This "winner-take-all" approach means that <i>small polling errors
+             in just a few key states can dramatically swing the national outcome</i>, making traditional polling averages 
+             less reliable for predicting the final electoral count.</p>
+             <br/>
           <h2>Methodology</h2>
           <p>I ran 1000 simulations of the US elections according to the poll data up to <em>{up_to_date_human}</em></p>
           <p>The way each simulation works is that I 'translate' each poll percentage of each stage to a probability of win, with the use of error function.</p>
           <p><a href="https://en.wikipedia.org/wiki/Error_function">Error function</a> is this sigmoid function below (here to be presice is the normalised to a 5% margin of error, i.e. is 0.5*(1+erf(spreead/5.1))</p>
+          <br/>
           <ErrorFunction />
           <p>There is some crucial characteristics of this function: 
             <ul>
@@ -114,7 +131,7 @@ export default function Layout() {
           </p>
           <p>Now that we have a probability assigned to each state win, the methodology of this Monte-Carlo simulation is quite simple:</p>
           <p>1. Get the latest poll of each state and calculate the probability of each candidate to win that state (using the above error function). I source polling data from <a href="https://projects.fivethirtyeight.com/polls/data/president_polls.csv">fivethirtyeight</a></p>
-          <p>2. We input a random value and see who wins the state according to the probability. We do this for each state and sum up the electorates of the two candidates.</p>
+          <p>2. We input a random value and see who wins the state according to the probability. Essentially, this means we toss a coin for each state to see who wins it - though this is a biased coin according to the polling probabilities. We do this for each state and sum up the electorates of the two candidates.</p>
           <p>3. We repeat the same process for a large number of simulations, in this case 1000.</p>
           <p>You can check the code for running the simulations and generating the visuals below at the <a href="https://github.com/anastluc/us-elections-MC">Github repository</a></p>
           <br/>
@@ -225,6 +242,7 @@ export default function Layout() {
 
         <div className="row">
           <h2>Most improbable combinations</h2>
+          <p>Below are the combinations that appeared the least times (1 time) in a series of 1000 simulations - some extremely edgy cases to occur.</p>
           <div className="two-columns">
             <div className="column">
             <ElectoralMap 
@@ -243,8 +261,15 @@ export default function Layout() {
         </div>
 
         <div className="row">
-          <h2>Final Section</h2>
-          <span>What do prediction markets say?</span>
+          <h2>What do prediction markets say?</h2>
+          <p>Monte Carlo is a form of statistical modelling. This is fundamentally different to market prediction. 
+            Market prediction deals with human behavior, psychology, and complex feedback loops where 
+            the act of prediction itself can change the outcome. Whereas, statistical modelling tells us 
+            what could happen given our understanding of the system's rules and randomness,
+              market tells us what people believe will happen (and place their money in). Statistical modelling 
+              should be  more reliable on paper, it is not untold though, market to predict much better highly 
+              complex and human biased systems like elections. 
+            </p>
           <p><a href="https://kalshi.com/markets/pres/presidential-elections/?referral=#pres-2024">kalshi</a></p>
           <p><a href="https://www.oddschecker.com/politics/us-politics/us-presidential-election/winner">betting companies</a></p>
           <p>

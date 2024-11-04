@@ -409,14 +409,15 @@ def make_dirs(directory_path):
 if __name__ == "__main__":
     dates = [
         # "2024_10_27", 
-        "2024_10_28", 
+        # "2024_10_28", 
         "2024_10_29",
         "2024_10_30",
         "2024_10_31",
-        "2024_11_01"
+        "2024_11_01",
+        "2024_11_02"
         # "2024_10_24",
         ]
-    latest_date = "2024_11_02"
+    latest_date = "2024_11_03"
     
     # clear out front-end/public/data folder
     # clear_out_dir("./front-end/public/data/visuals")
