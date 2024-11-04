@@ -45,14 +45,15 @@ const Modal = ({ isOpen, onClose }) => {
 export default function Layout() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const up_to_date = "2024_11_03"
-  const up_to_date_human = "3rd November 2024"
+  const up_to_date = "2024_11_04"
+  const up_to_date_human = "4th November 2024"
 
   const dates = [      
-      "2024_10_30", 
+      // "2024_10_30", 
       "2024_10_31", 
       "2024_11_01",      
       "2024_11_02",
+      "2024_11_03",
     ];
   const most_frequent_src = `./data/visuals/election_map_${up_to_date}_most_frequent.html`
   const most_frequent_data = `./data/election_map_${up_to_date}_most_frequent.csv`
@@ -66,10 +67,11 @@ export default function Layout() {
   }
 
   const past_few_days_most_frequent = [      
-    {"date":"2nd Nov 2024","data_src":`./data/election_map_${dates[3]}_most_frequent_4.csv`},
-    {"date":"1st Nov 2024","data_src":`./data/election_map_${dates[2]}_most_frequent_1.csv`},
-    {"date":"31st Oct 2024","data_src":`./data/election_map_${dates[1]}_most_frequent_2.csv`},
-    {"date":"30th Oct 2024","data_src":`./data/election_map_${dates[0]}_most_frequent_3.csv`},
+    {"date":"3rd Nov 2024","data_src":`./data/election_map_${dates[3]}_most_frequent_4.csv`},
+    {"date":"2nd Nov 2024","data_src":`./data/election_map_${dates[2]}_most_frequent_4.csv`},
+    {"date":"1st Nov 2024","data_src":`./data/election_map_${dates[1]}_most_frequent_1.csv`},
+    {"date":"31st Oct 2024","data_src":`./data/election_map_${dates[0]}_most_frequent_2.csv`},
+    // {"date":"30th Oct 2024","data_src":`./data/election_map_${dates[0]}_most_frequent_3.csv`},
     
     
   ]
@@ -130,7 +132,7 @@ export default function Layout() {
             </ul>
           </p>
           <p>Now that we have a probability assigned to each state win, the methodology of this Monte-Carlo simulation is quite simple:</p>
-          <p>1. Get the latest poll of each state and calculate the probability of each candidate to win that state (using the above error function). I source polling data from <a href="https://projects.fivethirtyeight.com/polls/data/president_polls.csv">fivethirtyeight</a></p>
+          <p>1. Get the <i>average of the latest 5 polls</i> of each state and calculate the probability of each candidate to win that state (using the above error function). I source polling data from <a href="https://projects.fivethirtyeight.com/polls/data/president_polls.csv">fivethirtyeight</a></p>
           <p>2. We input a random value and see who wins the state according to the probability. Essentially, this means we toss a coin for each state to see who wins it - though this is a biased coin according to the polling probabilities. We do this for each state and sum up the electorates of the two candidates.</p>
           <p>3. We repeat the same process for a large number of simulations, in this case 1000.</p>
           <p>You can check the code for running the simulations and generating the visuals below at the <a href="https://github.com/anastluc/us-elections-MC">Github repository</a></p>

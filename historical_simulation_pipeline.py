@@ -51,11 +51,15 @@ def getLatestPollOfStateAndCandidateAtTime(df, state, candidateA, candidateB, ve
     
     # Sort by end_date in descending order and get the first row
     latest_poll = state_candidate_polls.sort_values('end_date', ascending=False).iloc[0]
+
+    # get the mean of the last 5
+    mean_pct = state_candidate_polls.sort_values('end_date', ascending=False).head(5)["pct"].mean()
+    # print(latest_poll['pct'] , mean_pct)
     
     return {
         'state': state,
         'candidate': candidateA,
-        'percentage': latest_poll['pct'],
+        'percentage': mean_pct,#latest_poll['pct'],
         'poll_date': latest_poll['end_date'].strftime("%m/%d/%y")
     }
 
@@ -243,8 +247,8 @@ if __name__ == "__main__":
     # start_date =  datetime(2024, 8, 1)   
 
     # dates = generate_date_list(start_date, end_date, step=7)
-    start_date =  datetime(2024, 11, 1)
-    end_date = datetime(2024, 11, 3)
+    start_date =  datetime(2024, 9, 1)
+    end_date = datetime(2024, 11, 4)
     dates = generate_date_list(start_date, end_date, step=1)
     print(dates)
 
